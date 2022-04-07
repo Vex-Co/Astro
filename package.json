@@ -4,12 +4,14 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx nodemon ./src/app.js -e .js, .hbs, .css"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.3",
+    "hbs": "^4.2.0",
     "request": "^2.88.2"
   }
 }
