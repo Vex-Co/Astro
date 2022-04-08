@@ -17,6 +17,12 @@ app.get('', (req, res) => {
   res.render("index");
 })
 
+app.get('/weather', (req, res) => {
+  res.send(
+    req.query
+  );
+});
+
 app.listen(3000)
 // const cityName = process.argv[2];
 
