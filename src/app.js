@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const hbs = require('hbs')
+const hbs = require('hbs');
 const geocode = require("./utils/geocode"); 
 const weather = require("./utils/weather"); 
 
@@ -44,7 +44,6 @@ app.get('/weather', (req, res) => {
           weatherResponse.temprature = data.main.temp;
           weatherResponse.humidity = data.main.humidity;
           weatherResponse.visibility = +data.visibility/1000;
-          
         }
         return res.send(weatherResponse);
       })
