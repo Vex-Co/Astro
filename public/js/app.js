@@ -20,9 +20,9 @@ class App {
 
     let url;
     if (address)  {
-      url = `http://localhost:3000/weather?address=${address}`;
+      url = `/weather?address=${address}`;
     } else {
-      url = `http://localhost:3000/weather?address=${searchInput.value}`;
+      url = `/weather?address=${searchInput.value}`;
     }
 
     this.fetchData(url, (data)=> {
