@@ -49,7 +49,14 @@ app.get('/weather', (req, res) => {
       })
     }
   });
-
 });
+
+app.get('/about', (req, res) => {
+  res.render("comming_soon");
+})
+
+app.get('/help', (req, res) => {
+  res.render("comming_soon");
+})
 
 app.listen(port)
