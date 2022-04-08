@@ -7,16 +7,60 @@
 <body>
   {{>header}}
 
-  <section class="main-section">
-    <h1>Different kind of weather inside<br> of 24/7 hours.</h1>
-    <p>Yet too often some very human cultural artifacts really lead the buisness down<br> the certain routes.</p>
+  <div class="container">
+    <section class="main-section">
+      <h1>Different kind of <span class="text-orange">wea</span><span class="text-lightyellow">ther</span> inside<br> of 24/7 hours.</h1>
+      <p>Yet too often some very human cultural artifacts really lead the buisness down<br> the certain routes.</p>
 
-    <form action="">
-      <label for="">🔍</label>
-      <input id="search-inp" type="text" placeholder="Search City, Place...">
-      <button id="search-btn">Get Update</button>
-    </form>
-  </section>
+      <form action="">
+        <label for="">🔍</label>
+        <input id="search-inp" type="text" placeholder="Search City, Place...">
+        <button id="search-btn">Get Update</button>
+      </form>
+    </section>
+
+    <section class="display-section">
+      <div class="card-shadow"></div>
+      <div class="card">
+        <img id="loading" class="hide" src="/img/loading.gif">
+        <div class="error hide">Error while Loading...</div>
+        <div id="text-content">
+          <h1 id="location">
+            Lahore<sup class="symbol">PK</sup>
+          </h1>
+          <p id="temprature-place">
+          <span>
+            > Temprature
+          </span> 
+            
+            <span id="temprature">
+              35<span class="symbol">C°</span>
+            </span>
+          </p>
+          <p id="humidity-place">
+          <span>
+            > Humidity 
+          </span>
+            <span id="humidity">
+              29<span class="symbol">%</span>
+            </span>
+          </p>
+          <p id="visibility-place">
+            <span>
+              > Visibility 
+            </span>
+            
+            <span id="visibility">
+              5<span class="symbol">km</span>
+            </span>
+          </p>
+        </div>
+      </div>
+      <div class="card-halfcircle"></div>
+
+    </section>
+  </div>
+    
 
   {{!-- {{>footer}} --}}
 </body>

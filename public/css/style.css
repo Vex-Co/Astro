@@ -4,6 +4,7 @@
   padding: 0;
 }
 body {
+  background-color: #264653;
   font-family:Arial, Helvetica, sans-serif;
 }
 
@@ -27,23 +28,24 @@ header > nav a {
   text-decoration: none;
 }
 header > nav a:hover {
-  color: rgb(35, 35, 35);
+  color: rgb(212, 212, 212);
   text-decoration:underline;
 }
-
+/************************
+      Container
+*************************/
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
 /************************
       Main Section
 *************************/
 .main-section {
-  background-image: url('/img/wave background.png');
-  background-repeat: no-repeat;
   color: white;
-  height: 101.62vh;
-  width: 100vw;
   background-size: 100% 100%;
-
   padding-top: 15rem;
-  padding-left: 8rem;
 }
 .main-section h1 {
   font-weight: 100;
@@ -68,18 +70,99 @@ header > nav a:hover {
   margin-left: -40px ;
   outline: none;
   color: white;
-  width: 35%;
+  width: 73%;
 }
 .main-section input::placeholder {
-  color: #9084d8;
+  color: white;
 }
 .main-section button {
   margin-left: -10px;
-  background-image: linear-gradient(to top right, #1ea6be, #8ad9f1);
+  background-color: #e76f51;
+  font-size: 1rem;
   height: 48px;
   color: white;
   padding: 0 30px ;
   border: none;
+}
+.main-section button:hover {
+  background-color: #e9c46a;
+  color: black;
+  transition: 300ms ease-in;
+}
+/************************
+  Display Weather Card
+*************************/
+.display-section {
+  position: relative;
+  bottom: -8rem;
+}
+.display-section .card-shadow {
+  background-color: #e76f51;
+  width: 30vw;
+  height: 60vh;
+  box-shadow: 1px 1px 10px black;
+  border-radius: 10px;
+}
+.display-section .card-halfcircle {
+  position: absolute;
+  top: 40%;
+  right: 0;
+  width: 6rem;
+  height: 6rem;
+  background-color: #264653;
+  border-radius: 100% 0 0 100%;
+  box-shadow: 1px 1px 2px black;
+}
+.display-section .card {
+  font-weight: bold;
+  background-color: #e9c46a;
+  color: #264653;
+  width: 30vw;
+  height: 60vh;
+  margin-top: -24rem;
+  margin-left: 1rem;
+  box-shadow: 1px 1px 10px black;
+  border-radius: 10px;
+  padding: 60px;
+  font-size: 1.2rem;
+}
+.display-section .card .error {
+  margin-top: -1rem;
+  font-size: 1.5rem;
+}
+.display-section .card #loading {
+  margin-top: 2rem;
+  margin-left: 2rem;
+}
+.display-section .card h1 {
+  display: inline;
+}
+.display-section .card p#temprature-place {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.display-section .card #temprature {
+  margin-right: 4rem;
+}
+.display-section .card p#humidity-place {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.display-section .card #humidity {
+  margin-right: 4rem;
+}
+.display-section .card p#visibility-place {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.display-section .card #visibility {
+  margin-right: 4rem;
 }
 footer {
   position: absolute;
@@ -96,4 +179,17 @@ footer {
   font-weight: 300;
   text-align: center;
   margin-top: 30vh;
+}
+.text-orange {
+  color: #e76f51;
+}
+.text-lightyellow {
+  color: #e9c46a;
+}
+.symbol {
+  font-size: 1rem;
+  font-weight: 100;
+}
+.hide {
+  display: none;
 }
