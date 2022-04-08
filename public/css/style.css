@@ -22,6 +22,10 @@ header {
   margin-bottom: -12vh;
   font-weight: 100;
 }
+header #brand-name {
+  text-shadow:5px 1px 0px #e9c46a;
+  font-size: 3rem;
+}
 header > nav a {
   margin-left: 20px;
   color: white;
@@ -180,11 +184,10 @@ footer {
   text-align: center;
   margin-top: 30vh;
 }
-.text-orange {
-  color: #e76f51;
-}
 .text-lightyellow {
   color: #e9c46a;
+  text-shadow:1px 3px 0px #e76f51;
+
 }
 .symbol {
   font-size: 1rem;
