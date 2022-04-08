@@ -19,6 +19,11 @@ app.get('', (req, res) => {
 
 app.get('/weather', (req, res) => {
   const address = req.query.address;
+  if (!address) {
+    return res.send({
+      error: "Please provide address to search."
+    });
+  }
   const weatherResponse = {
     address: address
   };
