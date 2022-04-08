@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
 const geocode = require("./utils/geocode"); 
-const weather = require("./utils/weather"); 
+const weather = require("./utils/weather");
 
 const app = express();
 
@@ -37,7 +37,6 @@ app.get('/weather', (req, res) => {
         if (error)  {
           weatherResponse.error = error;
         } else {
-          console.log(data);
           weatherResponse.country_tag = data.sys.country;
           weatherResponse.area = data.name;
           weatherResponse.status = data.weather[0].description;

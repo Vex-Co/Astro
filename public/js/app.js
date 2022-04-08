@@ -1,6 +1,8 @@
 class App {
   static init() {
     const searchBtn = document.getElementById('search-btn');
+    // Default location is Lahore
+    this.searchWeather("Lahore");
 
     searchBtn.addEventListener('click', (event) => {
       event.preventDefault();
