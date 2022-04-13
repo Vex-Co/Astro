@@ -35,6 +35,50 @@ header > nav a:hover {
   color: rgb(212, 212, 212);
   text-decoration:underline;
 }
+
+.toggle{
+  position:relative;
+  width: 40px;
+  height: 35px;
+  display: inline-block;
+  float: right;
+  margin-right: -80px;
+  transition:ease-out .5s;
+}
+.bar1,.bar2,.bar3{
+  height: 2px;
+  width: 100%;
+  border-style: solid;
+  background-color: white;
+  border-radius: 10px;
+  display: block;
+  margin-top: 3px;
+}
+
+.bar1,.bar2,.bar3{
+  visibility: hidden;
+}
+
+.toggle:hover{
+  transform: translateY(-5px);
+}
+
+
+.bar1,.bar2,.bar3:hover{
+  background-color:#e76f51;
+}
+
+@media (max-width:600px)
+{
+  .bar1,.bar2,.bar3{
+    visibility: visible;  
+  }
+  header > nav a {
+    visibility: hidden;
+  }
+
+}
+
 /***************************************************
                       Home Page
 ****************************************************/
