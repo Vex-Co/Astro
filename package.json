@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "tsc; node ./src/app.js",
-    "dev": "tsc;npx nodemon ./src/app.js -e .js, .hbs, .css"
+    "start": "node ./src/app.js",
+    "dev": "npx nodemon ./src/app.js -e .js, .hbs, .css"
   },
   "keywords": [],
   "author": "",
