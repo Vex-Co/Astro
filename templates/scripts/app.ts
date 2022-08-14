@@ -1,3 +1,5 @@
 import { Weather } from './Weather/Weather'
 
-const weather = new Weather;
+const app = new Weather;
+
+app.init();

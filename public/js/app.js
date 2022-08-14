@@ -1,2 +1,3 @@
 import { Weather } from './Weather/Weather.js';
-const weather = new Weather;
+const app = new Weather;
+app.init();

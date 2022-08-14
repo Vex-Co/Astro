@@ -1,10 +1,10 @@
-import { WeatherData } from "../Weather/WeatherData";
+import { WeatherData } from "../interfaces/index";
 
-export class WeatherUIHandler {
+export class WeatherUI {
     searchInput = document.getElementById('search-inp') as HTMLInputElement;
-    card = document.getElementById('text-content');
-    error = document.querySelector('.error');
-    loadingImg = document.querySelector('img#loading');
+    textContentElem = document.getElementById('text-content') as HTMLElement;
+    error = document.querySelector('.error') as HTMLElement;
+    loadingImg = document.querySelector('img#loading') as HTMLElement;
 
     // Card Elements
     area = document.getElementById('location');
@@ -14,7 +14,9 @@ export class WeatherUIHandler {
 
     showLoading() {
         if (this.loadingImg) {
+            this.hideContent(this.textContentElem);
             this.showContent(this.loadingImg);
+            this.hideContent(this.error);
         }
     }
     attachEventListner(selectorID:string, callback: (event:MouseEvent) => void) {
@@ -34,26 +36,37 @@ export class WeatherUIHandler {
         }
     }
     showError(error: string) {
-        // this.showLoading();
         if (this.error) {
+            this.hideContent(this.loadingImg);
             this.error.textContent = error;
-            this.hideContent(this.error);
+            this.showContent(this.error);
         }
     }
     updateDisplayCard(data: WeatherData) {
         if (this.area && this.temprature && this.humidity && this.visibility){
-            this.area.innerHTML = `
-              ${data.address.charAt(0).toUpperCase() + data.address.slice(1).toLowerCase()}<sup class="symbol">${data.country_tag}</sup>
-            `;
-            this.temprature.innerHTML = `
-              ${data.temprature.toFixed(0)}<span class="symbol">C°</span>
-            `;
-            this.humidity.innerHTML = `
-              ${data.humidity}<span class="symbol">%</span>
-            `;
-            this.visibility.innerHTML = `
-              ${data.visibility}<span class="symbol">km</span>
-            `;
+            if (data.address) {
+                this.area.innerHTML = `
+                  ${data.address.charAt(0).toUpperCase() + data.address.slice(1).toLowerCase()}<sup class="symbol">${data.country_tag}</sup>
+                `;
+            }
+            if (data.temprature) {
+                this.temprature.innerHTML = `
+                  ${data.temprature.toFixed(0)}<span class="symbol">C°</span>
+                `;
+            }
+            if (data.temprature) {
+                this.humidity.innerHTML = `
+                  ${data.humidity}<span class="symbol">%</span>
+                `;
+            }
+            if (data.visibility) {
+                this.visibility.innerHTML = `
+                  ${data.visibility}<span class="symbol">km</span>
+                `;
+            }
+            this.hideContent(this.error);
+            this.hideContent(this.loadingImg);
+            this.showContent(this.textContentElem);
         }
     }
     // Hide Content
