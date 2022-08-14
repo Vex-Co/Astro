@@ -1,6 +1,6 @@
-import { WeatherData } from './WeatherData' // Interface
-import { WeatherUIHandler } from '../WeahterUIHandler';
+import { WeatherUIHandler } from '../UI/WeahterUIHandler';
 import { WeatherApi } from './api/WeatherApi';
+
 export class Weather {
   apiHandler= new WeatherApi;
   uiHandler = new WeatherUIHandler;
