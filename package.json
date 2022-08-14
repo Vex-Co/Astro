@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^18.7.3",
     "express": "^4.17.3",
     "hbs": "^4.2.0",
     "request": "^2.88.2",
