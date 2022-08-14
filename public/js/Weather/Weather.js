@@ -1,4 +1,6 @@
+import { ApiHandler } from "./ApiHandler.js";
 export class Weather {
+    apiHandler = new ApiHandler;
     static init() {
         const searchBtn = document.getElementById('search-btn');
         // Default location is Lahore
@@ -20,10 +22,10 @@ export class Weather {
         }
         let url;
         if (address) {
-            url = `../weather?address=${address}`;
+            url = `/weather?address=${address}`;
         }
         else if (searchInput && searchInput.value) {
-            url = `../weather?address=${searchInput.value}`;
+            url = `/weather?address=${searchInput.value}`;
         }
         else {
             // To fix
@@ -61,17 +63,17 @@ export class Weather {
         const visibility = document.getElementById('visibility');
         if (area && temprature && humidity && visibility) {
             area.innerHTML = `
-              ${data.address.charAt(0).toUpperCase() + data.address.slice(1).toLowerCase()}<sup class="symbol">${data.country_tag}</sup>
-            `;
+            ${data.address.charAt(0).toUpperCase() + data.address.slice(1).toLowerCase()}<sup class="symbol">${data.country_tag}</sup>
+          `;
             temprature.innerHTML = `
-              ${data.temprature.toFixed(0)}<span class="symbol">C°</span>
-            `;
+            ${data.temprature.toFixed(0)}<span class="symbol">C°</span>
+          `;
             humidity.innerHTML = `
-              ${data.humidity}<span class="symbol">%</span>
-            `;
+            ${data.humidity}<span class="symbol">%</span>
+          `;
             visibility.innerHTML = `
-              ${data.visibility}<span class="symbol">km</span>
-            `;
+            ${data.visibility}<span class="symbol">km</span>
+          `;
         }
     }
     static showLoading() {
