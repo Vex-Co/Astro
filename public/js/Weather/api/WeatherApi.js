@@ -7,14 +7,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-export class ApiHandler {
-    fetchData(url) {
+import { API } from "./API.js";
+export class WeatherApi extends API {
+    constructor() {
+        super();
+        this.baseUrl = '/weather';
+    }
+    // Fetch Weather from Server.
+    fetchWeather(cityName) {
         return __awaiter(this, void 0, void 0, function* () {
-            // this fetch function is builint
-            let apiResponse = yield fetch(url).then((response) => {
-                return response.json();
-            });
-            return apiResponse;
+            // Preparing URL
+            const url = `${this.baseUrl}?address=${cityName}`;
+            // Get the data from the fetchData(method) of API(Generic Class).
+            const data = yield this.fetchData(url);
+            return data;
         });
     }
 }

@@ -2,8 +2,14 @@ import { WeatherData } from "./Weather/WeatherData";
 
 export class WeatherUIHandler {
     searchInput = document.getElementById('search-inp') as HTMLInputElement;
-    textBox = document.getElementById('text-content');
-    error = document.querySelector('.error') as HTMLInputElement;
+    card = document.getElementById('text-content');
+    error = document.querySelector('.error');
+
+    // Card Elements
+    area = document.getElementById('location');
+    temprature = document.getElementById('temprature');
+    humidity = document.getElementById('humidity');
+    visibility = document.getElementById('visibility');
 
     showLoading() {
         const loading = document.querySelector('img#loading');
@@ -19,49 +25,52 @@ export class WeatherUIHandler {
         }
     }
     showWeather (data: WeatherData) {
-
-        if (this.textBox) {
-            // this.textBox.classList.toggle('hide');
-            // this.showLoading();
-        }
-        
-
+        // When there error property set by the server.
         if (data.error) {
             this.showError(data.error);
         }
         else {
-            // this.showLoading();
-            if (this.textBox) {
-                // this.textBox.classList.toggle('hide');
-            }
+            this.updateDisplayCard(data);
         }
     }
     showError(error: string) {
         // this.showLoading();
         if (this.error) {
             this.error.textContent = error;
-            this.error.classList.toggle("hide");
+            this.hideContent(this.error);
         }
     }
-    setParamsToDisplay(data: any) {
-        const area = document.getElementById('location');
-        const temprature = document.getElementById('temprature');
-        const humidity = document.getElementById('humidity');
-        const visibility = document.getElementById('visibility');
-    
-        if (area && temprature && humidity && visibility){
-            area.innerHTML = `
+    updateDisplayCard(data: WeatherData) {
+        if (this.area && this.temprature && this.humidity && this.visibility){
+            this.area.innerHTML = `
               ${data.address.charAt(0).toUpperCase() + data.address.slice(1).toLowerCase()}<sup class="symbol">${data.country_tag}</sup>
             `;
-            temprature.innerHTML = `
+            this.temprature.innerHTML = `
               ${data.temprature.toFixed(0)}<span class="symbol">C°</span>
             `;
-            humidity.innerHTML = `
+            this.humidity.innerHTML = `
               ${data.humidity}<span class="symbol">%</span>
             `;
-            visibility.innerHTML = `
+            this.visibility.innerHTML = `
               ${data.visibility}<span class="symbol">km</span>
             `;
         }
+    }
+    // Hide Content
+    hideContent(element: Element) {
+        element?.classList.add('hide')
+    }
+    // Show Content
+    showContent(element: HTMLElement) {
+        element?.classList.remove('hide')
+    }
+    // Get the input from search bar
+    getInput():string | undefined {
+        const cityName = this.searchInput.value;
+
+        if (cityName)
+            return cityName;
+        else
+            return undefined;
     }
 }

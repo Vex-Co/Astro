@@ -9,14 +9,17 @@ export class Weather {
     // Attach click event with search-btn
     this.uiHandler.attachEventListner('search-btn', (event) => {
       event.preventDefault();
-      // to fix
-      this.searchWeather('karachi');
+      
+      // Get the cityname from search bar if not, lahore is default city.
+      const cityName = this.uiHandler.getInput() || 'Lahore';
+      this.searchWeather(cityName);
     });
   }
-  async searchWeather(address:string) {
-    const data = await this.apiHandler.fetchData(address);
+  async searchWeather(cityName: string) {
+    // Get the weather info from server via api handler
+    const data = await this.apiHandler.fetchWeather(cityName);
 
-    this.uiHandler.setParamsToDisplay(data);
+    // Update UI based on the data.
     this.uiHandler.showWeather(data);
   }
 }
