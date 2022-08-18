@@ -22,30 +22,28 @@ export class GeoCode {
     }
   }
 
-  get() {
+  get(callback: (err: any, res: any) => void) {
     // Making URL For the request, sent to API.
     const url: string = `${this._baseUrl}${this._city}.json?access_token=${this._token}`;
 
-    request({ url: url, json: true }, (error: any, response: any) => {
-      if (response.body.features[0]) {
-        const coordinations: number[] =
-          response.body.features[0].geometry.coordinates!;
-
-        // Setting up the coords according to interface
-        const coords = {
-          lon: coordinations[0],
-          lat: coordinations[1],
-        };
-
-        console.log(coords);
-      } else {
-      }
-    });
+    request({ url: url, json: true }, callback);
   }
 }
 
-const geocode = new GeoCode("akhflasdhfkjhdsfs");
-geocode.get();
+const geocode = new GeoCode("lahore");
+
+geocode.get((error: any, response: any) => {
+  const features = response.body.features;
+  if (features) {
+    const coordinations: number[] = features[0].geometry.coordinates!;
+
+    // Setting up the coords according to interface
+    const coords = {
+      lon: coordinations[0],
+      lat: coordinations[1],
+    };
+  }
+});
 
 // const geocode = (city, callback) => {
 //   const geoCodeURL = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
