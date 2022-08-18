@@ -15,11 +15,9 @@ export class Weather {
         this.uiHandler = new WeatherUI;
     }
     init() {
-        // Attach click event with search-btn
         this.uiHandler.attachEventListner('search-btn', (event) => {
             event.preventDefault();
             this.uiHandler.showLoading();
-            // Get the cityname from search bar if not, lahore is default city.
             const cityName = this.uiHandler.getInput();
             if (cityName) {
                 this.searchWeather(cityName);
@@ -32,9 +30,7 @@ export class Weather {
     searchWeather(cityName) {
         return __awaiter(this, void 0, void 0, function* () {
             if (cityName) {
-                // Get the weather info from server via api handler
                 const data = yield this.apiHandler.fetchWeather(cityName);
-                // Update UI based on the data.
                 this.uiHandler.showWeather(data);
             }
         });

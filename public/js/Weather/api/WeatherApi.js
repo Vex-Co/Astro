@@ -13,12 +13,9 @@ export class WeatherApi extends API {
         super();
         this.baseUrl = '/weather';
     }
-    // Fetch Weather from Server.
     fetchWeather(cityName) {
         return __awaiter(this, void 0, void 0, function* () {
-            // Preparing URL
             const url = `${this.baseUrl}?address=${cityName}`;
-            // Get the data from the fetchData(method) of API(Generic Class).
             const data = yield this.fetchData(url);
             return data;
         });

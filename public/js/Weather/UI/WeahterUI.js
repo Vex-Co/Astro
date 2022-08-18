@@ -4,7 +4,6 @@ export class WeatherUI {
         this.textContentElem = document.getElementById('text-content');
         this.error = document.querySelector('.error');
         this.loadingImg = document.querySelector('img#loading');
-        // Card Elements
         this.area = document.getElementById('location');
         this.temprature = document.getElementById('temprature');
         this.humidity = document.getElementById('humidity');
@@ -24,7 +23,6 @@ export class WeatherUI {
         }
     }
     showWeather(data) {
-        // When there error property set by the server.
         if (data.error) {
             this.showError(data.error);
         }
@@ -66,15 +64,12 @@ export class WeatherUI {
             this.showContent(this.textContentElem);
         }
     }
-    // Hide Content
     hideContent(element) {
         element === null || element === void 0 ? void 0 : element.classList.add('hide');
     }
-    // Show Content
     showContent(element) {
         element === null || element === void 0 ? void 0 : element.classList.remove('hide');
     }
-    // Get the input from search bar
     getInput() {
         const cityName = this.searchInput.value;
         if (cityName)

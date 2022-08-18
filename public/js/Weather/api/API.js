@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 export class API {
     fetchData(url) {
         return __awaiter(this, void 0, void 0, function* () {
-            // this fetch function is builint
             let apiResponse = yield fetch(url).then((response) => {
                 return response.json();
             });
