@@ -7,11 +7,12 @@ export class WeatherHandler {
   static weatherAPIHandler: Weather = new Weather();
   static geocodeAPIHandler: Geocode = new Geocode();
 
-  static async getWeather(cityName: string): Promise<WeatherData> {
+  static async getWeather(cityName: string) {
     // Fetch the geocodes
-    const coords = await this.geocodeAPIHandler.fetch(cityName);
+    const coords = await this.geocodeAPIHandler.getGeocode(cityName);
+
     if (coords) {
-      const weather = await this.weatherAPIHandler.fetch(coords);
+      const weather = await this.weatherAPIHandler.getWeather(coords);
 
       return weather;
     } else {

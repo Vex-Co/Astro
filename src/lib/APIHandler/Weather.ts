@@ -4,24 +4,22 @@ import dotenv from 'dotenv';
 // Importing interfaces
 import { CoordinatesInterface } from '../interfaces/Coords';
 import { WeatherData } from '../interfaces/Weather';
-import { rejects } from 'assert';
+import { API } from './API';
 
 // Configuring variables from .env file
 dotenv.config();
 
-export class Weather {
+export class Weather extends API<WeatherData> {
   private baseUrl: string = 'https://api.openweathermap.org/data/2.5/weather?';
-  private url!: string;
+  protected url!: string;
+  // To remove
   private _weather!: WeatherData;
 
-  async fetch(coords: CoordinatesInterface) {
+  async getWeather(coords: CoordinatesInterface) {
     this.buildUrl(coords);
-    const res = await this.request();
+    const res = await this.fetch();
 
-    // set the weather accrding to the response
-    this.setWeather(res);
-
-    return this._weather;
+    return res;
   }
   request() {
     return new Promise((resolve: any, reject: any) => {
@@ -35,20 +33,21 @@ export class Weather {
     });
   }
 
-  private buildUrl(coords: CoordinatesInterface) {
+  protected buildUrl(coords: CoordinatesInterface) {
     this.url = `${this.baseUrl}lat=${coords.lat}&lon=${coords.lon}&appid=${process.env.WEATHER_API}&units=metric`;
   }
+
   // Callback function that will be passed to request function.
-  private setWeather(response: any) {
+  protected parseResponse(response: any): WeatherData {
     // Extracting weather data from response body
     const weather = response;
 
     if (weather.message) {
-      this._weather = {
+      return {
         error: weather.message,
       };
     } else {
-      this._weather = {
+      return {
         country_tag: weather.sys.country,
         area: weather.name,
         status: weather.weather[0].description,

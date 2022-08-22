@@ -1,44 +1,26 @@
 import request from 'request';
 import dotenv from 'dotenv';
+import { API } from './API';
 import { CoordinatesInterface } from '../interfaces/Coords';
 
 // Configuring variables from .env file
 dotenv.config();
 
-export class Geocode {
+export class Geocode extends API<CoordinatesInterface> {
   private _api: string | undefined = process.env.GEOCODE_API;
   private _baseUrl: string = `https://api.mapbox.com/geocoding/v5/mapbox.places/`;
-  private _url!: string;
-  private _coords!: CoordinatesInterface;
+  protected url!: string;
 
-  async fetch(cityName: string): Promise<CoordinatesInterface> {
+  // Get the geocode by using api
+  public async getGeocode(cityName: string): Promise<CoordinatesInterface> {
     this.buildUrl(cityName);
+    const res = await this.fetch();
 
-    const res = await this.request();
-    this.setCoords(res);
-
-    return this._coords;
-  }
-  request() {
-    return new Promise((resolve: any, reject: any) => {
-      request({ url: this._url, json: true }, function (error, res, body) {
-        if (!error && res.statusCode == 200) {
-          resolve(body);
-        } else {
-          reject(error);
-        }
-      });
-    });
+    return res; // this response is parsed automatically
   }
 
-  private buildUrl(cityName: string) {
-    // Making URL For the request, sent to API.
-    this._url = `${this._baseUrl}${cityName}.json?access_token=${this._api}`;
-  }
-
-  // callback function that will be passed to request to set the coords.
-  private setCoords(response: any) {
-    const feature = response.features[0];
+  protected parseResponse(res: any): CoordinatesInterface {
+    const feature = res.features[0];
     if (feature) {
       const coordinations: number[] = feature.geometry.coordinates!;
 
@@ -47,7 +29,16 @@ export class Geocode {
         lon: coordinations[0],
         lat: coordinations[1],
       };
-      this._coords = coords;
+      return coords;
+    } else {
+      return {
+        error: 'Could Not find your requested location.',
+      };
     }
+  }
+
+  protected buildUrl(cityName: string) {
+    // Making URL For the request, sent to API.
+    this.url = `${this._baseUrl}${cityName}.json?access_token=${this._api}`;
   }
 }
