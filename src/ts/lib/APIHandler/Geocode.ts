@@ -1,37 +1,44 @@
 import request from 'request';
 import dotenv from 'dotenv';
-import { CoordinatesInterface } from './interfaces/Coords';
+import { CoordinatesInterface } from '../interfaces/Coords';
 
 // Configuring variables from .env file
 dotenv.config();
 
-export class GeoCode {
+export class Geocode {
   private _api: string | undefined = process.env.GEOCODE_API;
   private _baseUrl: string = `https://api.mapbox.com/geocoding/v5/mapbox.places/`;
   private _url!: string;
-  private _city: string;
   private _coords!: CoordinatesInterface;
 
-  constructor(city?: string) {
-    if (city) {
-      this._city = encodeURIComponent(city);
-    } else {
-      this._city = '';
-    }
+  async fetch(cityName: string): Promise<CoordinatesInterface> {
+    this.buildUrl(cityName);
+
+    const res = await this.request();
+    this.setCoords(res);
+
+    return this._coords;
+  }
+  request() {
+    return new Promise((resolve: any, reject: any) => {
+      request({ url: this._url, json: true }, function (error, res, body) {
+        if (!error && res.statusCode == 200) {
+          resolve(body);
+        } else {
+          reject(error);
+        }
+      });
+    });
   }
 
-  fetch() {
-    request({ url: this._url, json: true }, this.setCoords.bind(this));
-  }
-
-  private buildUrl() {
+  private buildUrl(cityName: string) {
     // Making URL For the request, sent to API.
-    this._url = `${this._baseUrl}${this._city}.json?access_token=${this._api}`;
+    this._url = `${this._baseUrl}${cityName}.json?access_token=${this._api}`;
   }
 
   // callback function that will be passed to request to set the coords.
-  private setCoords(error: any, response: any) {
-    const feature = response.body.features[0];
+  private setCoords(response: any) {
+    const feature = response.features[0];
     if (feature) {
       const coordinations: number[] = feature.geometry.coordinates!;
 
