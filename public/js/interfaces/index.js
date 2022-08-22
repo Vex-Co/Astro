@@ -1,1 +1,1 @@
-export * from './WeatherData';
+export * from './WeatherData.js';
