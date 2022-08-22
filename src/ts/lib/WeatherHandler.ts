@@ -10,10 +10,15 @@ export class WeatherHandler {
   static async getWeather(cityName: string): Promise<WeatherData> {
     // Fetch the geocodes
     const coords = await this.geocodeAPIHandler.fetch(cityName);
+    if (coords) {
+      const weather = await this.weatherAPIHandler.fetch(coords);
 
-    const weather = await this.weatherAPIHandler.fetch(coords);
-
-    return weather;
+      return weather;
+    } else {
+      return {
+        error: 'Could not find your requested city.',
+      };
+    }
   }
   static async getWeatherController(req: Request, res: Response) {
     const cityName = req.query.address as string;
@@ -25,7 +30,7 @@ export class WeatherHandler {
       });
     }
 
-    const weahter = await this.getWeather(cityName);
+    const weahter = await WeatherHandler.getWeather(cityName);
 
     res.send(weahter);
   }

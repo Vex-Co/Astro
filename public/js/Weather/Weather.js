@@ -7,8 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { WeatherUI } from './UI/WeahterUI';
-import { WeatherApi } from './api/WeatherApi';
+import { WeatherUI } from './UI/WeahterUI.js';
+import { WeatherApi } from './api/WeatherApi.js';
 export class Weather {
     constructor() {
         this.apiHandler = new WeatherApi;

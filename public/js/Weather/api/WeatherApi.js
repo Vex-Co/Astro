@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { API } from "./API";
+import { API } from "./API.js";
 export class WeatherApi extends API {
     constructor() {
         super();

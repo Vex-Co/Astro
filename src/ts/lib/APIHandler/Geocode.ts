@@ -48,8 +48,6 @@ export class Geocode {
         lat: coordinations[1],
       };
       this._coords = coords;
-    } else {
-      throw new Error('Sorry Could not found the city on map.');
     }
   }
 }
