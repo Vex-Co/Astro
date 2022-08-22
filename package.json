@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node ./src/app.js",
-    "dev": "npx nodemon ./src/app.js -e .js, .hbs, .css"
+    "dev": "npx nodemon ./src/app.js -e .js, .hbs, .css",
+    "compile": "tsc -p src/ts; tsc -p templates/scripts"
   },
   "keywords": [],
   "author": "",
