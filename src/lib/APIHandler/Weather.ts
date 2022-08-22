@@ -19,6 +19,7 @@ export class Weather extends API<WeatherData> {
     this.buildUrl(coords);
     const res = await this.fetch();
 
+    res.city = coords.city;
     return res;
   }
   request() {

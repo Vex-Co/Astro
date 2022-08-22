@@ -1,11 +1,10 @@
 import { Geocode } from './APIHandler/Geocode';
 import { Weather } from './APIHandler/Weather';
-import { WeatherData } from './interfaces/Weather';
 import { Request, Response } from 'express';
 
 export class WeatherHandler {
-  static weatherAPIHandler: Weather = new Weather();
-  static geocodeAPIHandler: Geocode = new Geocode();
+  private static weatherAPIHandler: Weather = new Weather();
+  private static geocodeAPIHandler: Geocode = new Geocode();
 
   static async getWeather(cityName: string) {
     // Fetch the geocodes
@@ -36,3 +35,5 @@ export class WeatherHandler {
     res.send(weahter);
   }
 }
+
+WeatherHandler.getWeather('lahore');

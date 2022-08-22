@@ -39,10 +39,10 @@ export class WeatherUI {
     }
     updateDisplayCard(data) {
         if (this.area && this.temprature && this.humidity && this.visibility) {
-            if (data.area) {
+            if (data.city) {
                 this.area.innerHTML = `
-                  ${data.area.charAt(0).toUpperCase() +
-                    data.area.slice(1).toLowerCase()}<sup class="symbol">${data.country_tag}</sup>
+                  ${data.city.charAt(0).toUpperCase() +
+                    data.city.slice(1).toLowerCase()}<sup class="symbol">${data.country_tag}</sup>
                 `;
             }
             if (data.temprature) {

@@ -16,6 +16,7 @@ export class Geocode extends API<CoordinatesInterface> {
     this.buildUrl(cityName);
     const res = await this.fetch();
 
+    res.city = cityName;
     return res; // this response is parsed automatically
   }
 
