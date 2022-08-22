@@ -6,10 +6,11 @@ import { CoordinatesInterface } from './interfaces/Coords';
 dotenv.config();
 
 export class GeoCode {
-  private _token: string | undefined = process.env.GEOCODE_TOKEN;
+  private _api: string | undefined = process.env.GEOCODE_API;
   private _baseUrl: string = `https://api.mapbox.com/geocoding/v5/mapbox.places/`;
+  private _url!: string;
   private _city: string;
-  public _coords!: CoordinatesInterface;
+  private _coords!: CoordinatesInterface;
 
   constructor(city?: string) {
     if (city) {
@@ -20,10 +21,12 @@ export class GeoCode {
   }
 
   fetch() {
-    // Making URL For the request, sent to API.
-    const url: string = `${this._baseUrl}${this._city}.json?access_token=${this._token}`;
+    request({ url: this._url, json: true }, this.setCoords.bind(this));
+  }
 
-    request({ url: url, json: true }, this.setCoords.bind(this));
+  private buildUrl() {
+    // Making URL For the request, sent to API.
+    this._url = `${this._baseUrl}${this._city}.json?access_token=${this._api}`;
   }
 
   // callback function that will be passed to request to set the coords.

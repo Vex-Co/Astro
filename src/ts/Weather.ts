@@ -7,11 +7,16 @@ dotenv.config();
 
 class Weather {
   private baseUrl: string = 'https://api.openweathermap.org/data/2.5/weather?';
+  private url!: string;
 
   constructor() {}
-  get() {}
+
+  fetch() {
+    request({ url: this.url, json: true });
+  }
+
   buildUrl(coords: CoordinatesInterface) {
-    const url = `${this.baseUrl}lat=${coords.lat}&lon=${coords.lon}&appid=${process.env.WEATHER_API}&units=metric`;
+    this.url = `${this.baseUrl}lat=${coords.lat}&lon=${coords.lon}&appid=${process.env.WEATHER_API}&units=metric`;
   }
 }
 // const weather = (lon, lat, callback) => {
