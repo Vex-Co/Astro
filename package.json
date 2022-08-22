@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node ./src/app.js",
+    "start": "tsc -p src;node ./build/app.js",
     "dev": "npx nodemon ./src/app.js -e .js, .hbs, .css",
     "compile": "tsc -p src/ts; tsc -p templates/scripts"
   },
