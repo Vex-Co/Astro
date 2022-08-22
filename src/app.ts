@@ -2,6 +2,7 @@ import path from 'path';
 import express from 'express';
 import hbs from 'hbs';
 import { WeatherHandler } from './lib/WeatherHandler';
+import { CityValidator } from './lib/middleware/CityValidator';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -17,7 +18,11 @@ app.get('', (req, res) => {
   res.render('index');
 });
 
-app.get('/weather', WeatherHandler.getWeatherController);
+app.get(
+  '/weather',
+  CityValidator.validate,
+  WeatherHandler.getWeatherController
+);
 
 app.get('/about', (req, res) => {
   res.render('comming_soon');
